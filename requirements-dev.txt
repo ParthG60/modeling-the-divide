@@ -1,0 +1,5 @@
+# Dev-only: needed to regenerate the static figures (python generate_figures.py).
+# NOT installed on Streamlit Cloud — the app serves pre-committed PNGs and never
+# imports matplotlib at runtime.
+-r requirements.txt
+matplotlib==3.10.9

@@ -29,9 +29,11 @@ Multipage app (`st.navigation` router in `app.py`):
 - `model.py` — the ABM (initial distributions, interaction probability, 6 influence
   types, Gini-scaled tolerance). Faithful to the dissertation.
 - `generate_figures.py` — offline script that pre-renders the static PNGs in
-  `figures/` used by the narrative pages (run with `python generate_figures.py`).
+  `figures/` used by the narrative pages. Needs matplotlib, so run it with the
+  dev deps: `pip install -r requirements-dev.txt && python generate_figures.py`.
 - `figures/` — committed static figures (instant load on the narrative pages).
-- `requirements.txt` — pinned dependencies.
+- `requirements.txt` — runtime deps only (kept lean for fast Cloud builds;
+  matplotlib lives in `requirements-dev.txt` since it's only used offline).
 
 ## Deploy (free public URL)
 
