@@ -83,3 +83,6 @@ st.info(
     "lines. None of it proves the model, but it's the world the model's mechanism "
     "points to. Next, how the model actually works."
 )
+
+st.divider()
+st.page_link("pages/3_The_Model.py", label="Next: The Model", icon="➡️")

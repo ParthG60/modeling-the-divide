@@ -123,7 +123,7 @@ def fig_sensitivity_exposure():
     vals = [0.05, 0.1, 0.2, 0.4, 0.8]
     sig = sweep("exposure", vals)
     fig, ax = plt.subplots(figsize=(7, 4.2))
-    ax.plot(vals, sig, "o-", color="#d62728", lw=2, ms=7)
+    ax.plot(vals, sig, "o-", color="#0f766e", lw=2.5, ms=7)
     ax.set_xlabel("Exposure (E)")
     ax.set_ylabel("Final polarization  (σ of opinions)")
     ax.set_title("More exposure → more polarization")
@@ -138,7 +138,7 @@ def fig_sensitivity_gini():
     vals = [0.25, 0.35, 0.434, 0.55, 0.7]
     sig = sweep("gini", vals)
     fig, ax = plt.subplots(figsize=(7, 4.2))
-    ax.plot(vals, sig, "o-", color="#1f77b4", lw=2, ms=7)
+    ax.plot(vals, sig, "o-", color="#0f766e", lw=2.5, ms=7)
     ax.axvline(0.434, color="#888", ls="--", lw=1)
     ax.text(0.44, 0.02, "US base case\n(Gini = 0.434)", fontsize=8, color="#555")
     ax.set_xlabel("Gini coefficient (economic inequality)")

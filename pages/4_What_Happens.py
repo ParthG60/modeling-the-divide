@@ -104,3 +104,6 @@ st.success(
     "model has a dozen dials. Head to the **Playground** to set your own scenario "
     "and see if you can make the divide collapse, explode, or hold steady."
 )
+
+st.divider()
+st.page_link("pages/5_Playground.py", label="Next: open the Playground", icon="➡️")

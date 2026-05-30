@@ -154,3 +154,6 @@ itself worth a look.
 > and Mitigating Political Polarization. BSc (Hons) Mathematics & Statistics,
 > University of St Andrews.*
 """)
+
+st.divider()
+st.page_link("pages/4_What_Happens.py", label="Next: What Happens", icon="➡️")

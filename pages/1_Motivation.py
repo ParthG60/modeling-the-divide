@@ -84,3 +84,6 @@ if pdf.exists():
         file_name="Goyal-2024-Modeling-the-Divide.pdf",
         mime="application/pdf",
     )
+
+st.divider()
+st.page_link("pages/2_The_Evidence.py", label="Next: The Evidence", icon="➡️")
