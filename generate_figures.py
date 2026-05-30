@@ -16,7 +16,7 @@ from model import DEM, IND, REP, Params, simulate
 FIG = Path(__file__).parent / "figures"
 FIG.mkdir(exist_ok=True)
 
-PARTY_COLOR = {DEM: "#1f77b4", IND: "#888888", REP: "#d62728"}
+PARTY_COLOR = {DEM: "#2563eb", IND: "#7c3aed", REP: "#dc2626"}
 PARTY_LABEL = {DEM: "Democrat", IND: "Independent", REP: "Republican"}
 BINS = np.linspace(0, 1, 41)
 
@@ -77,6 +77,33 @@ def fig_evolution_panel():
           % (r.polarization[0], r.polarization[-1]))
 
 
+def fig_independents_capture():
+    """Independents start centered but get pulled into both camps — they don't
+    hold the middle. Shows their opinion distribution at start vs end."""
+    p = Params(n_agents=600, exposure=0.1, n_steps=600, seed=1)
+    r = simulate(p)
+    ind = r.parties == IND
+    start = r.opinions_history[0][ind]
+    end = r.opinions_history[-1][ind]
+    mid0 = ((start >= 0.33) & (start <= 0.66)).mean()
+    midF = ((end >= 0.33) & (end <= 0.66)).mean()
+
+    fig, ax = plt.subplots(figsize=(8, 4.3))
+    ax.hist(start, bins=BINS, color=PARTY_COLOR[IND], alpha=0.35,
+            label=f"Start: {mid0*100:.0f}% in the middle")
+    ax.hist(end, bins=BINS, color=PARTY_COLOR[IND], alpha=0.9,
+            label=f"End: {midF*100:.0f}% in the middle")
+    ax.axvspan(0.33, 0.66, color="#94a3b8", alpha=0.12)
+    ax.set_xlim(0, 1)
+    ax.set_xlabel("Opinion  (0 = left, 1 = right)")
+    ax.set_ylabel("Independents")
+    ax.set_title("The middle empties: independents get pulled into both camps")
+    ax.legend(frameon=False, fontsize=9)
+    fig.savefig(FIG / "independents_capture.png")
+    plt.close(fig)
+    print(f"  independents_capture.png  (middle share {mid0:.2f} -> {midF:.2f})")
+
+
 def sweep(param_name, values, base=None, n_steps=400, seeds=(0, 1, 2, 3, 4)):
     """Average final polarization (sigma) over seeds for each value."""
     base = base or {}
@@ -128,6 +155,7 @@ if __name__ == "__main__":
     print("Generating figures into", FIG)
     fig_initial_distribution()
     fig_evolution_panel()
+    fig_independents_capture()
     fig_sensitivity_exposure()
     fig_sensitivity_gini()
     print("Done.")

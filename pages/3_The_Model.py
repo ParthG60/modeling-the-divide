@@ -1,4 +1,4 @@
-"""Page 3 — The Model: the starting setup and why each assumption is made."""
+"""Page 3 — The Model: setup, intuition, and the maths (appendix)."""
 
 from pathlib import Path
 
@@ -11,62 +11,146 @@ FIG = Path(__file__).parent.parent / "figures"
 st.title("The Model")
 st.markdown(
     """
-My guiding principle was something the modelling literature calls **"input
-realism"**: every assumption should be traceable to real data or established
-theory, not pulled from thin air. So before anything moves, let me walk you through
-where the population *starts* — and why I set it up this way.
+The whole thing is built on one stubborn principle I kept coming back to in the
+dissertation, which the modelling literature calls *input realism*: every
+assumption should trace back to real data or established theory, never to a hunch.
+So before anything moves, let me show you where the population starts, and talk you
+through why it looks the way it does.
 
-Each agent sits on a **left–right opinion line from 0 to 1**, and carries two
-labels: a **party** (Democrat, Independent, Republican) and an **elite / mass**
-status. Here's the starting distribution:
+Each agent sits somewhere on a left-to-right opinion line from 0 to 1. They carry
+two labels. The first is a **party**: Democrat, Independent, or Republican. The
+second is whether they're an **elite** (a pundit, politician, or very-online
+account with outsized reach) or one of the **masses**. That's the entire cast.
     """
 )
 
 st.image(str(FIG / "initial_distribution.png"), use_container_width=True,
-         caption="The initial population (t = 0): already leaning, but with a "
-                 "populated middle. Blue = Democrat, grey = Independent, red = Republican.")
+         caption="The starting population at t = 0. Blue Democrats lean left, "
+                 "red Republicans lean right, violet Independents sit in the middle.")
 
-st.subheader("Why it starts bimodal")
+st.subheader("Why it starts already leaning")
 st.markdown(
     """
-The population doesn't start neutral — it starts *already leaning*, with Democrats
-clustered left (around 0.35) and Republicans right (around 0.65). That's not me
-putting my thumb on the scale; it's what the data shows. Enders (2021) documents
-that opinion in the US is already **bimodal** on both ideological and affective
-measures. I anchor the party split and proportions (≈33% / 34% / 33%) to ANES
-survey data and hold them fixed across every run.
+Notice the population doesn't begin neutral. Democrats cluster around 0.35 and
+Republicans around 0.65, with a populated but thinning middle. That isn't me
+tipping the scales. It's what the survey data shows: opinion in the US is already
+bimodal, on both ideological and emotional measures (Enders, 2021). I anchor the
+party split and the roughly one-third / one-third / one-third proportions to ANES
+data, and hold them fixed in every run.
     """
 )
 
-st.subheader("Why elites get fatter tails")
+st.subheader("Why elites sit further out")
 st.markdown(
     """
-The same evidence shows something I found important: **elites are *more* polarized
-than the masses they represent.** So elite agents (pundits, politicians, very-online
-accounts — a small minority) get a wider opinion variance: fatter tails, more of
-them out at the edges. I deliberately *didn't* shift their average further out — I
-only widened the spread — to avoid baking in the very bimodality I wanted the model
-to *produce*, not assume.
+The same evidence shows something I find quietly damning: elites are *more*
+polarized than the people they claim to speak for. So elite agents get a wider
+spread, fatter tails, more of them parked out near the edges. I deliberately left
+their *average* where the masses' is and only widened the variance, so the model
+earns its bimodality through the dynamics rather than having it baked in from the
+first frame.
     """
 )
 
-st.subheader("Why independents sit in the middle")
+st.subheader("Why independents start in the middle")
 st.markdown(
     """
-Independents are a non-partisan bloc — common across democracies and well
-documented in the US — so I centre them at 0.5 with no built-in lean. I'll be
-honest about a modeller's choice here: I gave independent elites and independent
-masses the *same* variance, simply because I couldn't find evidence to justify
-treating them differently. As you'll see on the next page, this unassuming bloc in
-the middle turns out to matter more than I expected.
+Independents are the bloc with no strong allegiance, common across democracies and
+well documented in the US, so I centre them at 0.5. One honest confession: I gave
+independent elites and independent masses the same spread, purely because I found
+no evidence to justify treating them differently. What this centrist bloc actually
+*does* once the simulation runs turned out to be the most interesting question of
+the whole project, and it gets its own page.
     """
 )
 
+st.subheader("How a conversation works")
 st.markdown(
     """
----
-That's the whole setup: a leaning-but-not-yet-split population, with a more extreme
-elite minority and a moderate centre. Now the interesting question — **what happens
-when you let them talk to each other?** →
+Each step, agents bump into one another. Two things govern what happens:
+
+1. **Who talks to whom.** The closer two opinions are, the likelier they interact.
+   How steeply that probability falls with distance is the **Exposure** dial: turn
+   it up and people reach further across the divide to talk.
+2. **What a conversation does.** If two people are within a **tolerance** window,
+   the exchange pulls them together. If they're outside it, the exchange pushes
+   them apart. Same-party agents always pull together, tribally, no matter the gap.
+
+The clever part, and the bit of the dissertation I'm proudest of, is that tolerance
+isn't a fixed personality trait. It *shrinks as economic inequality rises*. A single
+macro number, the Gini coefficient, quietly re-scales the threshold that every
+interaction in the country is judged against. More inequality, thinner tolerance,
+more repulsion. That link is what ties the economy to the discourse.
     """
 )
+
+with st.expander("Appendix: the full rules and the maths"):
+    st.markdown(r"""
+The model extends Axelrod-style opinion dynamics with three additions: an
+elite/mass split with different behaviour, a tolerance threshold scaled by economic
+inequality, and an explicit role for independents.
+
+**Initial distribution (Eq. 2.1).** Each agent's starting opinion is drawn from a
+group-specific normal:
+
+$$
+x_i(0) \sim \begin{cases}
+\mathcal{N}(0.5,\, 0.2^2)   & \text{Independent} \\
+\mathcal{N}(0.35,\, 0.15^2) & \text{Mass Democrat} \\
+\mathcal{N}(0.65,\, 0.15^2) & \text{Mass Republican} \\
+\mathcal{N}(0.35,\, 0.2^2)  & \text{Elite Democrat} \\
+\mathcal{N}(0.65,\, 0.2^2)  & \text{Elite Republican}
+\end{cases}
+$$
+
+**Interaction probability (Eq. 2.2).** For a pair $(i,j)$ at opinion distance
+$d = |x_i - x_j|$, with $E$ the Exposure parameter and a multiplier $m_{\text{prob}}$
+applied when either agent is an elite:
+
+$$
+p_{ij} = \left(\tfrac{1}{2}\right)^{d/E} \cdot m_{\text{prob}}^{\mathbb{1}[\text{elite}]}
+$$
+
+**Opinion update (Eq. 2.3).** If the interaction fires:
+
+$$
+x_i(t+1) = x_i(t) + s \cdot R \cdot (x_j(t) - x_i(t)) \cdot k
+$$
+
+where $s \in \{+1,-1\}$ is attract or repel, $R$ is **Responsiveness**, and
+$k \in \{m_\text{imp}, 1, 1/m_\text{imp}\}$ is the strong / regular / weak modifier.
+
+**Tolerance (Eq. 2.4).** The effective tolerance is inversely scaled by inequality:
+
+$$
+\text{Tolerance} = \frac{T}{\text{Gini}}, \qquad \text{Gini}_{\text{base}} = 0.434
+$$
+
+**Which influence type fires (Table 2.2):**
+
+| Type | Condition |
+|---|---|
+| Strong positive | Same-party partisans, Elite + Mass |
+| Regular positive | Same-party same-status; both Independents within tolerance; different-party Elite + Mass within tolerance; Partisan-Elite + Independent-Mass within tolerance |
+| Weak positive | Same-status, different-party partisans, within tolerance |
+| Strong negative | Different-party partisans, Elite + Mass, outside tolerance |
+| Regular negative | Different-party same-status outside tolerance; Partisan-Elite + Independent-Mass outside tolerance |
+| Weak negative | Both Independents, outside tolerance |
+
+Two rules sit on top: same-party partisans *always* attract (tribalism, ignoring
+tolerance), and elites *don't move* when they talk to the masses (only the listener
+shifts).
+
+**Implementation note.** The dissertation ran $N = 5000$ agents over up to 2000
+steps, with every pair interacting each step (about 12.5 million pairings per step).
+That's too heavy for a snappy web app, so this version uses a smaller $N$ and has
+each agent talk to one random partner per step instead of all pairs. The
+per-interaction rules are identical; the dynamics are equivalent in expectation,
+though you may need more steps to reach the same place. As you'll see on the next
+page, this simplification does change one finding, and I think the discrepancy is
+itself worth a look.
+
+> *Goyal, P. (2024). Modeling the Divide: Mathematical Approaches to Understanding
+> and Mitigating Political Polarization. BSc (Hons) Mathematics & Statistics,
+> University of St Andrews.*
+""")

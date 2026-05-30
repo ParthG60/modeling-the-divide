@@ -12,12 +12,11 @@ Run locally:  streamlit run app.py
 import streamlit as st
 
 pages = [
-    st.Page("pages/1_Motivation.py",   title="Start here",     icon="🏠", default=True),
-    st.Page("pages/2_The_Evidence.py", title="The Evidence",   icon="📊"),
-    st.Page("pages/3_The_Model.py",    title="The Model",      icon="⚙️"),
-    st.Page("pages/4_What_Happens.py", title="What Happens",   icon="📈"),
-    st.Page("pages/5_Playground.py",   title="Playground",     icon="🎛️"),
-    st.Page("pages/6_Methodology.py",  title="Methodology",    icon="📐"),
+    st.Page("pages/1_Motivation.py",   title="Start here",   icon="🏠", default=True),
+    st.Page("pages/2_The_Evidence.py", title="The Evidence", icon="📊"),
+    st.Page("pages/3_The_Model.py",    title="The Model",    icon="⚙️"),
+    st.Page("pages/4_What_Happens.py", title="What Happens", icon="📈"),
+    st.Page("pages/5_Playground.py",   title="Playground",   icon="🎛️"),
 ]
 
 st.navigation(pages).run()

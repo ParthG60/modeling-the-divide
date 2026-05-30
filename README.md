@@ -17,12 +17,15 @@ streamlit run app.py
 Multipage app (`st.navigation` router in `app.py`):
 
 - `app.py` — navigation router (entry point).
-- `pages/1_Motivation.py` — the question and the thesis (first-person).
+- `pages/1_Motivation.py` — the question, the thesis, dissertation download (first-person).
 - `pages/2_The_Evidence.py` — current data: OWID polarization score, Pew, Gallup.
-- `pages/3_The_Model.py` — the initial setup and why each assumption is made.
-- `pages/4_What_Happens.py` — running it forward + the two headline findings.
+- `pages/3_The_Model.py` — the setup and why each assumption is made, with the
+  full maths in an appendix expander.
+- `pages/4_What_Happens.py` — running it forward, the two drivers, and the honest
+  independents finding.
 - `pages/5_Playground.py` — the interactive sim (only page that computes live).
-- `pages/6_Methodology.py` — equations and exact rules.
+- `.streamlit/config.toml` — light theme + teal accent.
+- `assets/Goyal-2024-Modeling-the-Divide.pdf` — the dissertation (declaration page removed).
 
 ## Other files
 
