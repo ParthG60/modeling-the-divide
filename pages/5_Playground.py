@@ -127,7 +127,9 @@ else:
 
     sigma_initial = float(result.polarization[0])
     sigma_final = float(result.polarization[-1])
+    op_initial = result.opinions_history[0]
     op_final = result.opinions_history[-1]
+    camp_initial = float(((op_initial < 0.15) | (op_initial > 0.85)).mean())
     camp_final = float(((op_final < 0.15) | (op_final > 0.85)).mean())
 
     _sigma_help = ("σ, the standard deviation of opinions: ~0 when everyone agrees, "
@@ -140,7 +142,8 @@ else:
     m2.metric("Polarization at end", f"{sigma_final:.2f}", f"{sigma_final - sigma_initial:+.2f}",
               help=_sigma_help)
     m3, m4 = st.columns(2)
-    m3.metric("At the extremes", f"{camp_final:.0%}", help=_camp_help)
+    m3.metric("At the extremes", f"{camp_final:.0%}", f"{camp_final - camp_initial:+.0%}",
+              help=_camp_help)
     m4.metric("Effective tolerance", f"{result.effective_tolerance:.2f}",
               help="T / Gini. Agents within this opinion distance pull together.")
 
