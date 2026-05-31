@@ -18,9 +18,10 @@ Interaction types from Table 2.2:
                       Partisan-Elite + Independent-Mass within tol
   Weak positive     : same-status different-party within tol
   Strong negative   : different-party (Elite + Mass) outside tol
-  Regular negative  : different-party same-status outside tol /
-                      Partisan-Elite + Independent-Mass outside tol
-  Weak negative     : both Independents outside tol
+  Regular negative  : different-party same-status outside tol
+  Weak negative     : any interaction involving an independent, outside tol
+                      (independents repel only weakly -> they resist the extremes,
+                       which is the dissertation's moderating mechanism)
 
 Implementation notes:
 - Each step, every agent picks one random partner (instead of all O(N^2) pairs).
@@ -119,11 +120,9 @@ def classify_influence(party_i, party_j, elite_i, elite_j, within_tol):
     if same_party and party_i != IND:
         return (+1, "strong" if elite_mass else "regular")
 
-    # Both independents
+    # Both independents: attract when close, only WEAKLY repel when far.
     if both_ind:
-        if same_status and within_tol:
-            return (+1, "regular")
-        return (-1, "weak")
+        return (+1, "regular") if within_tol else (-1, "weak")
 
     # Different-party partisans
     if both_partisan_diff:
@@ -132,12 +131,13 @@ def classify_influence(party_i, party_j, elite_i, elite_j, within_tol):
         # same status
         return (+1, "weak") if within_tol else (-1, "regular")
 
-    # Mixed: partisan + independent
+    # Mixed: partisan + independent.
+    # The dissertation's moderating mechanism: "interactions involving independents
+    # tend to be less polarizing... in attraction scenarios they have strong positive
+    # influence, however in repulsion scenarios the influence isn't that strong."
+    # So independents attract normally but repel only WEAKLY.
     if one_ind:
-        # Dissertation explicitly names Partisan-Elite + Independent-Mass cases.
-        # For other partisan-independent pairs, use the same regular-positive /
-        # regular-negative rule by symmetry.
-        return (+1, "regular") if within_tol else (-1, "regular")
+        return (+1, "regular") if within_tol else (-1, "weak")
 
     return (0, "regular")
 

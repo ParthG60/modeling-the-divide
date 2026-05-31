@@ -11,16 +11,15 @@ FIG = Path(__file__).parent.parent / "figures"
 st.title("The Model")
 st.markdown(
     """
-The whole thing is built on one stubborn principle I kept coming back to in the
-dissertation, which the modelling literature calls *input realism*: every
-assumption should trace back to real data or established theory, never to a hunch.
-So before anything moves, let me show you where the population starts, and talk you
-through why it looks the way it does.
+The model follows a principle the modelling literature calls *input realism*:
+every assumption should trace back to real data or established theory rather than a
+guess. Before anything moves, here is where the population starts and why it looks
+the way it does.
 
-Each agent sits somewhere on a left-to-right opinion line from 0 to 1. They carry
+Each agent sits somewhere on a left-to-right opinion line from 0 to 1, and carries
 two labels. The first is a **party**: Democrat, Independent, or Republican. The
-second is whether they're an **elite** (a pundit, politician, or very-online
-account with outsized reach) or one of the **masses**. That's the entire cast.
+second is whether they are an **elite** (a pundit, politician, or high-reach
+account) or one of the **masses**. That is the whole cast.
     """
 )
 
@@ -43,12 +42,10 @@ data, and hold them fixed in every run.
 st.subheader("Why elites sit further out")
 st.markdown(
     """
-The same evidence shows something I find quietly damning: elites are *more*
-polarized than the people they claim to speak for. So elite agents get a wider
-spread, fatter tails, more of them parked out near the edges. I deliberately left
-their *average* where the masses' is and only widened the variance, so the model
-earns its bimodality through the dynamics rather than having it baked in from the
-first frame.
+The same evidence shows that elites are more polarized than the people they
+represent. So elite agents get a wider spread, with more of them near the edges. I
+left their average where the masses' is and only widened the variance, so the split
+emerges from the dynamics rather than being assumed at the start.
     """
 )
 
@@ -56,11 +53,10 @@ st.subheader("Why independents start in the middle")
 st.markdown(
     """
 Independents are the bloc with no strong allegiance, common across democracies and
-well documented in the US, so I centre them at 0.5. One honest confession: I gave
-independent elites and independent masses the same spread, purely because I found
-no evidence to justify treating them differently. What this centrist bloc actually
-*does* once the simulation runs turned out to be the most interesting question of
-the whole project, and it gets its own page.
+well documented in the US, so I centre them at 0.5. One caveat: I gave independent
+elites and independent masses the same spread, because I found no evidence to
+justify treating them differently. How this centrist bloc behaves once the
+simulation runs is covered on the next page.
     """
 )
 
@@ -76,11 +72,14 @@ Each step, agents bump into one another. Two things govern what happens:
    the exchange pulls them together. If they're outside it, the exchange pushes
    them apart. Same-party agents always pull together, tribally, no matter the gap.
 
-The clever part, and the bit of the dissertation I'm proudest of, is that tolerance
-isn't a fixed personality trait. It *shrinks as economic inequality rises*. A single
-macro number, the Gini coefficient, quietly re-scales the threshold that every
-interaction in the country is judged against. More inequality, thinner tolerance,
-more repulsion. That link is what ties the economy to the discourse.
+The less obvious part is that tolerance is not a fixed trait. It shrinks as economic
+inequality rises, so the Gini coefficient re-scales the threshold that every
+interaction is judged against. More inequality means thinner tolerance and more
+repulsion. That is the link between the economy and the discourse.
+
+Independents are treated as less polarizing throughout: they move normally when
+drawn toward someone but only weakly when pushed away, which keeps them from being
+dragged to the extremes.
     """
 )
 
@@ -134,21 +133,21 @@ $$
 | Regular positive | Same-party same-status; both Independents within tolerance; different-party Elite + Mass within tolerance; Partisan-Elite + Independent-Mass within tolerance |
 | Weak positive | Same-status, different-party partisans, within tolerance |
 | Strong negative | Different-party partisans, Elite + Mass, outside tolerance |
-| Regular negative | Different-party same-status outside tolerance; Partisan-Elite + Independent-Mass outside tolerance |
-| Weak negative | Both Independents, outside tolerance |
+| Regular negative | Different-party same-status, outside tolerance |
+| Weak negative | Any interaction involving an independent, outside tolerance |
 
-Two rules sit on top: same-party partisans *always* attract (tribalism, ignoring
-tolerance), and elites *don't move* when they talk to the masses (only the listener
-shifts).
+Three rules sit on top: same-party partisans *always* attract (tribalism, ignoring
+tolerance); elites *don't move* when they talk to the masses (only the listener
+shifts); and interactions involving independents repel only weakly, so independents
+resist being pushed to the extremes. That last rule is what makes independents a
+moderating force.
 
 **Implementation note.** The dissertation ran $N = 5000$ agents over up to 2000
 steps, with every pair interacting each step (about 12.5 million pairings per step).
-That's too heavy for a snappy web app, so this version uses a smaller $N$ and has
-each agent talk to one random partner per step instead of all pairs. The
-per-interaction rules are identical; the dynamics are equivalent in expectation,
-though you may need more steps to reach the same place. As you'll see on the next
-page, this simplification does change one finding, and I think the discrepancy is
-itself worth a look.
+That is too heavy for a web app, so this version uses a smaller $N$ and has each
+agent talk to one random partner per step instead of all pairs. The per-interaction
+rules are identical and the dynamics are equivalent in expectation, though you may
+need more steps to reach the same place.
 
 > *Goyal, P. (2024). Modeling the Divide: Mathematical Approaches to Understanding
 > and Mitigating Political Polarization. BSc (Hons) Mathematics & Statistics,

@@ -59,17 +59,15 @@ and [Feelings about the federal government grow more polarized (Pew, Dec 2025)]
 st.subheader("3. Governance quality is paying the price")
 st.markdown(
     """
-This is the part of my 2024 thesis I find most striking in hindsight: a decline in
-the quality of governance, as policymakers prioritize party loyalty over the public
-good.
+This connects to the governance claim in my 2024 argument: a decline in quality as
+policymakers prioritize party loyalty over the public good.
 
 Gallup put Congressional approval at roughly 17% in December 2025, with disapproval
 later tying its record high at 86%. More telling for the mechanism: Gallup reports
 the party gap in how people rate Congress has never been more divergent. Republicans
 approved of Congress at around 61% when their party held power, against single
-digits for the other side. That isn't citizens judging governance on the merits.
-It's party loyalty over the public good, measured directly, and it's the pandering
-dynamic in one chart.
+digits for the other side. That is less an assessment of governance on the merits
+than party loyalty, measured directly.
 
 Sources: [Record party gaps in approval of Congress (Gallup)]
 (https://news.gallup.com/poll/693230/record-party-gaps-job-approval-supreme-court-congress.aspx),

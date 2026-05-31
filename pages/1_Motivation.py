@@ -17,10 +17,9 @@ st.caption("An interactive companion to my 2024 St Andrews dissertation. By Part
 
 st.markdown(
     """
-In 2024 I wrote my undergraduate dissertation on a question that wouldn't leave me
-alone: why does a population split into two hostile camps? Not drift, not healthy
-disagreement, but the hardening of a society into two sides that can barely talk to
-each other.
+In 2024 I wrote my undergraduate dissertation on a question I kept coming back to:
+why does a population split into two hostile camps? Not ordinary disagreement, but a
+society hardening into two sides that can barely talk to each other.
 
 I want to be precise about what I mean, because this distinction is what the whole
 model rests on:
@@ -46,10 +45,9 @@ project:
 > decline in the quality of governance, as policymakers prioritize party loyalty
 > over the public good."*
 
-I wrote that in 2024. Since then I think it has aged uncomfortably well: deeper
-partisan hostility, record-low trust in institutions, and a politics that rewards
-pandering to your own side over actually governing. The next page lays out the
-evidence so you can judge for yourself.
+I wrote that in 2024. Since then the trend has continued: deeper partisan hostility,
+record-low trust in institutions, and incentives that reward party loyalty over
+governing. The next page lays out the evidence so you can judge for yourself.
 
 ### What this is
 
