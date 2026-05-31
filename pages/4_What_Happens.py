@@ -24,6 +24,14 @@ st.image(str(FIG / "evolution_panel.png"), use_container_width=True,
 
 st.markdown(
     """
+I measure polarization with σ, the standard deviation of opinions. It is near zero
+when everyone agrees and reaches its maximum of 0.5 when the population splits
+evenly into two camps at opposite ends of the scale, so it captures exactly the
+thing we care about: how far opinions have spread toward the extremes. It is the
+measure the dissertation used. Its one blind spot is that it can't tell a smooth
+spread from a clean two-camp split, but in this model the dynamics always tend
+toward two camps, so it tracks the divide well.
+
 No rule changed and no external shock hit the system. The divide emerges from
 ordinary interactions. The next question is which settings make it worse. Two
 matter most.

@@ -11,19 +11,21 @@ PARTY_LABEL = {DEM: "Democrat", IND: "Independent", REP: "Republican"}
 
 st.set_page_config(page_title="Playground", layout="centered", page_icon="⚖️")
 
-# Party shares always sum to 1. Move one slider and the other two rebalance.
-PARTY_KEYS = ["share_dem", "share_ind", "share_rep"]
-for _k, _v in {"share_dem": 0.331, "share_ind": 0.338, "share_rep": 0.331}.items():
+# The population mix (parties + elites) always sums to 1. Move one share and the
+# rest rebalance proportionally so the total stays at 100%.
+GROUP_KEYS = ["share_dem", "share_ind", "share_rep", "share_elite"]
+for _k, _v in {"share_dem": 0.31, "share_ind": 0.33, "share_rep": 0.31,
+               "share_elite": 0.05}.items():
     st.session_state.setdefault(_k, _v)
 
 
 def _rebalance(changed):
-    others = [k for k in PARTY_KEYS if k != changed]
+    others = [k for k in GROUP_KEYS if k != changed]
     remaining = max(0.0, 1.0 - st.session_state[changed])
     total = sum(st.session_state[k] for k in others)
     if total <= 1e-9:
         for k in others:
-            st.session_state[k] = remaining / 2
+            st.session_state[k] = remaining / len(others)
     else:
         for k in others:
             st.session_state[k] = st.session_state[k] / total * remaining
@@ -60,34 +62,36 @@ with c4:
     st.caption("How far a single conversation moves someone's opinion. "
                "Higher means people are more easily swayed each time they talk.")
 
-with st.expander("More settings (population, party mix, elites, run length)"):
-    st.markdown("**Party mix**")
-    st.caption("Move any one share and the other two rebalance so the total always "
-               "stays at 100%. This sets how the population is divided by party.")
-    m1, m2, m3 = st.columns(3)
-    m1.slider("Democrat", 0.0, 1.0, step=0.01, format="%.2f",
+with st.expander("More settings (population mix, elites, run length)"):
+    st.markdown("**Population mix**")
+    st.caption("These four shares are the make-up of the population and always sum "
+               "to 100%. Move any one and the rest rebalance. Elites are spread "
+               "across the parties, so raising the elite share lowers the others.")
+    g1, g2 = st.columns(2)
+    g1.slider("Democrats", 0.0, 1.0, step=0.01, format="%.2f",
               key="share_dem", on_change=_rebalance, args=("share_dem",))
-    m2.slider("Independent", 0.0, 1.0, step=0.01, format="%.2f",
+    g2.slider("Independents", 0.0, 1.0, step=0.01, format="%.2f",
               key="share_ind", on_change=_rebalance, args=("share_ind",))
-    m3.slider("Republican", 0.0, 1.0, step=0.01, format="%.2f",
+    g3, g4 = st.columns(2)
+    g3.slider("Republicans", 0.0, 1.0, step=0.01, format="%.2f",
               key="share_rep", on_change=_rebalance, args=("share_rep",))
+    g4.slider("Elites", 0.0, 1.0, step=0.01, format="%.2f",
+              key="share_elite", on_change=_rebalance, args=("share_elite",))
     dem_p = st.session_state["share_dem"]
     ind_p = st.session_state["share_ind"]
     rep_p = st.session_state["share_rep"]
+    elite_prop = st.session_state["share_elite"]
     st.caption(f"Current mix: {dem_p:.0%} Democrat / {ind_p:.0%} Independent / "
-               f"{rep_p:.0%} Republican.")
+               f"{rep_p:.0%} Republican / {elite_prop:.0%} elite.")
+    st.caption("Elites have wider reach and a stronger pull, and don't move when "
+               "they talk to ordinary people.")
 
     st.markdown("**Population size**")
     n_agents = st.slider("Number of people", 100, 1500, 500, step=100)
     st.caption("How many agents in the simulation. Fewer runs faster; the full "
                "dissertation used 5000.")
 
-    st.markdown("**Elites**")
-    elite_prop = st.slider("Share who are elites", 0.0, 0.20, 0.05, step=0.01)
-    st.caption("Elites cut across all parties (some Democrats, Independents and "
-               "Republicans are elites), so this is separate from the party mix. "
-               "They have wider reach and a stronger pull, and don't move when they "
-               "talk to ordinary people.")
+    st.markdown("**Elite loudness**")
     e1, e2 = st.columns(2)
     impact_mult = e1.slider("Persuasion multiplier", 1.0, 3.0, 1.2, step=0.1)
     prob_mult = e2.slider("Reach multiplier", 1.0, 3.0, 1.2, step=0.1)
@@ -125,8 +129,11 @@ else:
     sigma_final = float(result.polarization[-1])
 
     m1, m2, m3 = st.columns(3)
-    m1.metric("Polarization at start", f"{sigma_initial:.2f}")
-    m2.metric("Polarization at end", f"{sigma_final:.2f}", f"{sigma_final - sigma_initial:+.2f}")
+    _sigma_help = ("σ, the standard deviation of opinions: ~0 when everyone agrees, "
+                   "0.5 when the population splits evenly into two camps at the extremes.")
+    m1.metric("Polarization at start", f"{sigma_initial:.2f}", help=_sigma_help)
+    m2.metric("Polarization at end", f"{sigma_final:.2f}", f"{sigma_final - sigma_initial:+.2f}",
+              help=_sigma_help)
     m3.metric("Effective tolerance", f"{result.effective_tolerance:.2f}",
               help="T / Gini. Agents within this opinion distance pull together.")
 
