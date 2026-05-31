@@ -11,6 +11,23 @@ PARTY_LABEL = {DEM: "Democrat", IND: "Independent", REP: "Republican"}
 
 st.set_page_config(page_title="Playground", layout="centered", page_icon="⚖️")
 
+# Party shares always sum to 1. Move one slider and the other two rebalance.
+PARTY_KEYS = ["share_dem", "share_ind", "share_rep"]
+for _k, _v in {"share_dem": 0.331, "share_ind": 0.338, "share_rep": 0.331}.items():
+    st.session_state.setdefault(_k, _v)
+
+
+def _rebalance(changed):
+    others = [k for k in PARTY_KEYS if k != changed]
+    remaining = max(0.0, 1.0 - st.session_state[changed])
+    total = sum(st.session_state[k] for k in others)
+    if total <= 1e-9:
+        for k in others:
+            st.session_state[k] = remaining / 2
+    else:
+        for k in others:
+            st.session_state[k] = st.session_state[k] / total * remaining
+
 st.title("Playground")
 st.markdown(
     """
@@ -43,33 +60,46 @@ with c4:
     st.caption("How far a single conversation moves someone's opinion. "
                "Higher means people are more easily swayed each time they talk.")
 
-with st.expander("More settings (population, elites, run length)"):
-    st.markdown("**Population**")
-    p1, p2 = st.columns(2)
-    n_agents = p1.slider("Number of people", 100, 1500, 500, step=100,
-                         help="Fewer keeps it fast; the full dissertation used 5000.")
-    elite_prop = p2.slider("Share who are elites", 0.0, 0.20, 0.05, step=0.01,
-                           help="Elites have wider reach and a stronger pull, and "
-                                "don't move when they talk to ordinary people.")
-    st.caption("Party mix (must be the bulk of the population; the rest are split):")
+with st.expander("More settings (population, party mix, elites, run length)"):
+    st.markdown("**Party mix**")
+    st.caption("Move any one share and the other two rebalance so the total always "
+               "stays at 100%. This sets how the population is divided by party.")
     m1, m2, m3 = st.columns(3)
-    dem_p = m1.number_input("% Democrat", 0.0, 1.0, 0.331, step=0.01, format="%.3f")
-    ind_p = m2.number_input("% Independent", 0.0, 1.0, 0.338, step=0.01, format="%.3f")
-    rep_p = m3.number_input("% Republican", 0.0, 1.0, 0.331, step=0.01, format="%.3f")
+    m1.slider("Democrat", 0.0, 1.0, step=0.01, format="%.2f",
+              key="share_dem", on_change=_rebalance, args=("share_dem",))
+    m2.slider("Independent", 0.0, 1.0, step=0.01, format="%.2f",
+              key="share_ind", on_change=_rebalance, args=("share_ind",))
+    m3.slider("Republican", 0.0, 1.0, step=0.01, format="%.2f",
+              key="share_rep", on_change=_rebalance, args=("share_rep",))
+    dem_p = st.session_state["share_dem"]
+    ind_p = st.session_state["share_ind"]
+    rep_p = st.session_state["share_rep"]
+    st.caption(f"Current mix: {dem_p:.0%} Democrat / {ind_p:.0%} Independent / "
+               f"{rep_p:.0%} Republican.")
 
-    st.markdown("**Elite loudness**")
+    st.markdown("**Population size**")
+    n_agents = st.slider("Number of people", 100, 1500, 500, step=100)
+    st.caption("How many agents in the simulation. Fewer runs faster; the full "
+               "dissertation used 5000.")
+
+    st.markdown("**Elites**")
+    elite_prop = st.slider("Share who are elites", 0.0, 0.20, 0.05, step=0.01)
+    st.caption("Elites cut across all parties (some Democrats, Independents and "
+               "Republicans are elites), so this is separate from the party mix. "
+               "They have wider reach and a stronger pull, and don't move when they "
+               "talk to ordinary people.")
     e1, e2 = st.columns(2)
-    impact_mult = e1.slider("Persuasion multiplier", 1.0, 3.0, 1.2, step=0.1,
-                            help="How much harder an elite pushes a listener's opinion.")
-    prob_mult = e2.slider("Reach multiplier", 1.0, 3.0, 1.2, step=0.1,
-                          help="How much likelier an elite is to be in any given conversation.")
+    impact_mult = e1.slider("Persuasion multiplier", 1.0, 3.0, 1.2, step=0.1)
+    prob_mult = e2.slider("Reach multiplier", 1.0, 3.0, 1.2, step=0.1)
+    st.caption("Persuasion: how much harder an elite pushes a listener's opinion. "
+               "Reach: how much likelier an elite is to be in any conversation.")
 
-    st.markdown("**Run**")
+    st.markdown("**Run length**")
     r1, r2 = st.columns(2)
-    n_steps = r1.slider("Time steps", 50, 1000, 300, step=50,
-                        help="How long to let the conversations run.")
-    seed = r2.number_input("Random seed", value=42, step=1,
-                           help="Change it to get a different random run of the same settings.")
+    n_steps = r1.slider("Time steps", 50, 1000, 300, step=50)
+    seed = r2.number_input("Random seed", value=42, step=1)
+    st.caption("Time steps: how long the conversations run. Seed: change it for a "
+               "different random run of the same settings.")
 
 run = st.button("Run", type="primary", use_container_width=True)
 

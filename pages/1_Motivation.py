@@ -17,45 +17,41 @@ st.caption("An interactive companion to my 2024 St Andrews dissertation. By Part
 
 st.markdown(
     """
-In 2024 I wrote my undergraduate dissertation on a question I kept coming back to:
-why does a population split into two hostile camps? Not ordinary disagreement, but a
-society hardening into two sides that can barely talk to each other.
+In 2024 I wrote my undergraduate dissertation on a simple question: why does a
+population split into two hostile camps? Not ordinary disagreement, but a society
+hardening into two sides that can barely talk to each other.
 
-I want to be precise about what I mean, because this distinction is what the whole
-model rests on:
+The distinction matters, and the dissertation drew it clearly:
 
 > *"Variation in opinion is usually important for a democratic society, as the
 > exchange of ideas and debate is important for truth seeking. However political
 > polarization is not simply a variation of opinion."*
 
-Polarization comes in two flavours, and I model both. The first is **ideological**:
-the distribution of opinions becomes bimodal, so the middle hollows out and people
-pile up at two extremes. The second is **affective**: the emotional gap. It isn't
-just that we disagree, it's that we increasingly dislike and distrust the people
-who disagree with us.
+I model two kinds. **Ideological** polarization is when the distribution of opinions
+becomes bimodal: the middle empties and people cluster at the extremes. **Affective**
+polarization is the emotional gap, where we not only disagree but dislike and
+distrust the other side.
 
 ### Why it matters
 
-I cared enough to spend a year on this because polarization isn't a spectator
-sport. Here is the line from the dissertation that became the thesis of the whole
-project:
+Polarization degrades how a country is governed. The dissertation put it this way:
 
 > *"Political polarization undermines democratic processes by fostering an
 > environment where compromise becomes increasingly difficult. It leads to a
 > decline in the quality of governance, as policymakers prioritize party loyalty
 > over the public good."*
 
-I wrote that in 2024. Since then the trend has continued: deeper partisan hostility,
-record-low trust in institutions, and incentives that reward party loyalty over
-governing. The next page lays out the evidence so you can judge for yourself.
+That was written in 2024. Since then the trend has continued: deeper partisan
+hostility, record-low trust in institutions, and incentives that reward party
+loyalty over governing. The next page shows the evidence.
 
 ### What this is
 
-This isn't a forecast or a proof. It's a deliberately simple model, a few hundred
-agents on a left-to-right line with rules for who talks to whom and how they shift
-afterwards, that reproduces the mechanism by which everyday interactions harden into
-a societal divide. Two quotes I put at the front of the dissertation, and still
-believe, set the right expectations:
+A deliberately simple model: a few hundred agents on a left-to-right line, with
+rules for who talks to whom and how they shift afterwards. It reproduces the
+mechanism by which everyday interactions harden into a divide. It is not a forecast
+or a proof. Two quotes I kept at the front of the dissertation set the right
+expectations:
 
 > *"All models are wrong, but some are useful."* (George Box)
 >
@@ -63,14 +59,14 @@ believe, set the right expectations:
 
 ### How to read this
 
-A short, signposted walkthrough. Use the sidebar to move through it:
+A short walkthrough. Use the sidebar or the Next links at the foot of each page:
 
 1. **The Evidence**: what has happened to polarization and governance since 2024.
-2. **The Model**: the starting setup, and why I made each assumption.
-3. **What Happens**: run it forward, and the findings that surprised me.
-4. **Playground**: your turn, move every dial and try to break it.
+2. **The Model**: the setup, and the reason for each assumption.
+3. **What Happens**: run it forward and the main results.
+4. **Playground**: change the settings and see what happens.
 
-You don't need any maths to follow along. Start with **The Evidence** in the sidebar.
+No maths needed to follow along.
     """
 )
 
