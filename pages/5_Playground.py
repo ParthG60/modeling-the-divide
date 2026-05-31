@@ -127,20 +127,28 @@ else:
 
     sigma_initial = float(result.polarization[0])
     sigma_final = float(result.polarization[-1])
+    op_final = result.opinions_history[-1]
+    camp_final = float(((op_final < 0.15) | (op_final > 0.85)).mean())
 
-    m1, m2, m3 = st.columns(3)
     _sigma_help = ("σ, the standard deviation of opinions: ~0 when everyone agrees, "
                    "0.5 when the population splits evenly into two camps at the extremes.")
+    _camp_help = ("Share of people parked at the extremes (opinion below 0.15 or above "
+                  "0.85). σ can miss a lopsided split; this catches it.")
+
+    m1, m2 = st.columns(2)
     m1.metric("Polarization at start", f"{sigma_initial:.2f}", help=_sigma_help)
     m2.metric("Polarization at end", f"{sigma_final:.2f}", f"{sigma_final - sigma_initial:+.2f}",
               help=_sigma_help)
-    m3.metric("Effective tolerance", f"{result.effective_tolerance:.2f}",
+    m3, m4 = st.columns(2)
+    m3.metric("At the extremes", f"{camp_final:.0%}", help=_camp_help)
+    m4.metric("Effective tolerance", f"{result.effective_tolerance:.2f}",
               help="T / Gini. Agents within this opinion distance pull together.")
 
-    if sigma_final >= 0.45:
-        st.markdown("**Result: two hard camps.** The middle has emptied out.")
-    elif sigma_final <= 0.12:
-        st.markdown("**Result: consensus.** The population converged.")
+    if camp_final >= 0.5:
+        st.markdown("**Result: two hard camps.** Most people have moved to the extremes "
+                    "and the middle has emptied out.")
+    elif sigma_final <= 0.12 and camp_final <= 0.15:
+        st.markdown("**Result: consensus.** The population converged toward the middle.")
     else:
         st.markdown("**Result: a partial divide.** Some clustering, some middle left.")
 

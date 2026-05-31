@@ -29,8 +29,10 @@ when everyone agrees and reaches its maximum of 0.5 when the population splits
 evenly into two camps at opposite ends of the scale, so it captures exactly the
 thing we care about: how far opinions have spread toward the extremes. It is the
 measure the dissertation used. Its one blind spot is that it can't tell a smooth
-spread from a clean two-camp split, but in this model the dynamics always tend
-toward two camps, so it tracks the divide well.
+spread from a clean two-camp split, and it can read low for a lopsided divide
+where one camp swallows most of the population. So in the Playground I show it
+alongside the share of people parked at the extremes as a companion check, and the
+opinion distribution itself, which is the real arbiter of shape.
 
 No rule changed and no external shock hit the system. The divide emerges from
 ordinary interactions. The next question is which settings make it worse. Two
