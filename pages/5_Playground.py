@@ -34,8 +34,8 @@ st.title("Playground")
 st.markdown(
     """
 Your turn. Set the dials below, press **Run**, and watch where the population ends
-up. Each control changes one rule of the world. The captions tell you what you're
-tuning and what it stands for.
+up. Each control changes one rule of the simulation. The captions tell you what
+you're tuning and what it stands for.
     """
 )
 

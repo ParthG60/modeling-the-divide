@@ -20,7 +20,7 @@ forward and the middle thins out.
 
 st.image(str(FIG / "evolution_panel.png"), use_container_width=True,
          caption="A centred population separates into two camps. σ, the spread of "
-                 "opinions, is the polarization measure; it rises as the divide widens.")
+                 "opinions, rises from about 0.22 to 0.43 here as the divide widens.")
 
 st.markdown(
     """
@@ -41,7 +41,9 @@ matter most.
 )
 
 st.subheader("Driver 1: exposure")
-st.image(str(FIG / "sensitivity_exposure.png"), use_container_width=True)
+st.image(str(FIG / "sensitivity_exposure.png"), use_container_width=True,
+         caption="Final polarization (σ) rises with exposure: more contact across "
+                 "the divide brings more hostile encounters, not fewer.")
 st.markdown(
     """
 More contact across the divide produces more polarization, not less. When
@@ -54,7 +56,10 @@ together rather than apart.
 )
 
 st.subheader("Driver 2: inequality")
-st.image(str(FIG / "sensitivity_gini.png"), use_container_width=True)
+st.image(str(FIG / "sensitivity_gini.png"), use_container_width=True,
+         caption="Final polarization (σ) rises with inequality: a higher Gini "
+                 "shrinks tolerance, so the divide widens. At low inequality it "
+                 "barely forms.")
 st.markdown(
     """
 Tolerance is not fixed in the model. It shrinks as economic inequality rises, on
@@ -81,7 +86,8 @@ toward the centre.
 
 st.image(str(FIG / "independents_dampen.png"), use_container_width=True,
          caption="Final polarization falls as independents make up more of the "
-                 "population. The band shows variation across runs.")
+                 "population, from about σ = 0.38 with none to about 0.29 at 70%. "
+                 "The band shows variation across runs.")
 
 st.markdown(
     """
@@ -89,7 +95,7 @@ The effect is modest at first. Below about a third of the population, independen
 make little difference. Above that, the final divide shrinks steadily as their
 share grows. The United States sits near that one-third mark, roughly where the
 effect begins to matter, which is part of why a wider, less partisan middle is one
-of the few things in the model that slows the slide.
+of the few things in the model that slows the divide.
     """
 )
 

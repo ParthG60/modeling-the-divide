@@ -44,10 +44,13 @@ st.markdown(
 This is the affective polarization the model encodes: not just disagreement, but
 hostility toward the other side.
 
-The share of partisans who view the opposing party as more immoral than other
-Americans rose to 72% of Republicans and 63% of Democrats in 2022, up from just 47%
-and 35% in 2016. By December 2025, Pew reported that Americans' feelings about the
-federal government had grown more polarized, with partisan anger spiking.
+By 2025, large majorities felt frustration and anger toward the opposing party:
+89% of Democrats and 86% of Republicans said the other party frustrated them, and
+81% of Democrats and 70% of Republicans said it made them angry. The gap is also
+widening: Pew finds partisan differences in feelings toward the federal government
+are wider than at any point since it began asking in 1997, with Democratic anger at
+the government reaching 44% in late 2025, above its 34% peak during Trump's first
+term.
 
 Sources: [How Americans feel about the two parties (Pew, Oct 2025)]
 (https://www.pewresearch.org/politics/2025/10/30/how-americans-feel-about-the-republican-and-democratic-parties/),
@@ -62,12 +65,13 @@ st.markdown(
 This connects to the governance claim in my 2024 argument: a decline in quality as
 policymakers prioritize party loyalty over the public good.
 
-Gallup put Congressional approval at roughly 17% in December 2025, with disapproval
-later tying its record high at 86%. More telling for the mechanism: Gallup reports
-the party gap in how people rate Congress has never been more divergent. Republicans
-approved of Congress at around 61% when their party held power, against single
-digits for the other side. That is less an assessment of governance on the merits
-than party loyalty, measured directly.
+Gallup tracked approval of the Republican-controlled Congress from 17% in January
+2025 down into the low-to-mid teens after the autumn government shutdown; by April
+2026 approval had fallen to 10% and disapproval tied its record high at 86%. More
+telling for the mechanism: the party gap in how people rate Congress has never been
+wider. In 2025, 61% of Republicans approved of Congress against 6% of Democrats, a
+55-point gap, the largest in Gallup's record since 1974. That is less an assessment
+of governance on the merits than party loyalty, measured directly.
 
 Sources: [Record party gaps in approval of Congress (Gallup)]
 (https://news.gallup.com/poll/693230/record-party-gaps-job-approval-supreme-court-congress.aspx),
