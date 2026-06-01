@@ -19,7 +19,7 @@ the way it does.
 Each agent sits somewhere on a left-to-right opinion line from 0 to 1, and carries
 two labels. The first is a **party**: Democrat, Independent, or Republican. The
 second is whether they are an **elite** (a pundit, politician, or high-reach
-account) or one of the **masses**. That is the whole cast.
+account) or one of the **masses**. That is all there is to an agent.
     """
 )
 
@@ -31,8 +31,8 @@ st.subheader("Why it starts already leaning")
 st.markdown(
     """
 Notice the population doesn't begin neutral. Democrats cluster around 0.35 and
-Republicans around 0.65, with a populated but thinning middle. That isn't me
-tipping the scales. It's what the survey data shows: opinion in the US is already
+Republicans around 0.65, with a populated but thinning middle. I didn't choose
+that tilt; it is what the survey data shows: opinion in the US is already
 bimodal, on both ideological and emotional measures (Enders, 2021). I anchor the
 party split and the roughly one-third / one-third / one-third proportions to ANES
 data, and hold them fixed in every run.

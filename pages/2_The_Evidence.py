@@ -56,7 +56,7 @@ and [Feelings about the federal government grow more polarized (Pew, Dec 2025)]
     """
 )
 
-st.subheader("3. Governance quality is paying the price")
+st.subheader("3. Governance quality is declining")
 st.markdown(
     """
 This connects to the governance claim in my 2024 argument: a decline in quality as
@@ -77,7 +77,7 @@ and [Disapproval of Congress ties record high at 86% (Gallup)]
 )
 
 st.info(
-    "So: polarization up, hostility up, governance trust collapsing along party "
+    "So: polarization up, hostility up, and trust in Congress splitting along party "
     "lines. None of it proves the model, but it's the world the model's mechanism "
     "points to. Next, how the model actually works."
 )
