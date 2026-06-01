@@ -28,11 +28,11 @@ I measure polarization with σ, the standard deviation of opinions. It is near z
 when everyone agrees and reaches its maximum of 0.5 when the population splits
 evenly into two camps at opposite ends of the scale, so it captures exactly the
 thing we care about: how far opinions have spread toward the extremes. It is the
-measure the dissertation used. Its one blind spot is that it can't tell a smooth
-spread from a clean two-camp split, and it can read low for a lopsided divide
-where one camp swallows most of the population. So in the Playground I show it
-alongside the share of people parked at the extremes as a companion check, and the
-opinion distribution itself, which is the real arbiter of shape.
+measure the dissertation used. It has one blind spot: it can't tell a smooth
+spread from a clean two-camp split, and it reads low when a divide is lopsided and
+one side holds most of the people. So in the Playground I pair it with the share
+of people at the extremes, and with the opinion distribution itself, which shows
+the shape directly.
 
 No rule changed and no external shock hit the system. The divide emerges from
 ordinary interactions. The next question is which settings make it worse. Two

@@ -134,8 +134,8 @@ else:
 
     _sigma_help = ("σ, the standard deviation of opinions: ~0 when everyone agrees, "
                    "0.5 when the population splits evenly into two camps at the extremes.")
-    _camp_help = ("Share of people parked at the extremes (opinion below 0.15 or above "
-                  "0.85). σ can miss a lopsided split; this catches it.")
+    _camp_help = ("Share of people at the extremes (opinion below 0.15 or above "
+                  "0.85). σ can miss a lopsided split; this number catches it.")
 
     m1, m2 = st.columns(2)
     m1.metric("Polarization at start", f"{sigma_initial:.2f}", help=_sigma_help)
