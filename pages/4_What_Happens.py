@@ -26,8 +26,8 @@ st.markdown(
     """
 I measure polarization with σ, the standard deviation of opinions. It is near zero
 when everyone agrees and reaches its maximum of 0.5 when the population splits
-evenly into two camps at opposite ends of the scale, so it captures exactly the
-thing we care about: how far opinions have spread toward the extremes. It is the
+evenly into two camps at opposite ends of the scale, so it measures what we care
+about: how far opinions have spread toward the extremes. It is the
 measure the dissertation used. It has one blind spot: it can't tell a smooth
 spread from a clean two-camp split, and it reads low when a divide is lopsided and
 one side holds most of the people. So in the Playground I pair it with the share
@@ -48,8 +48,8 @@ st.markdown(
     """
 More contact across the divide produces more polarization, not less. When
 tolerance is limited, hostile encounters push people apart faster than friendly
-ones bring them together. This is the echo-chamber result from a different angle,
-and it is why simply exposing people to the other side can backfire. What helps is
+ones bring them together. This is the echo-chamber result, and it is why simply
+exposing people to the other side can backfire. What helps is
 contact that stays inside the tolerance window, where the exchange pulls people
 together rather than apart.
     """
@@ -66,8 +66,8 @@ Tolerance is not fixed in the model. It shrinks as economic inequality rises, on
 the assumption that a wider gap sours people on politics in general. So the Gini
 coefficient re-scales the threshold every interaction is judged against. Lower
 inequality means higher tolerance and a calmer population; at low enough inequality
-the divide barely forms. Some of the lever sits in the economy, not only in the
-discourse.
+the divide barely forms. That makes inequality an economic lever on a political
+problem.
     """
 )
 
@@ -101,8 +101,8 @@ of the few things in the model that slows the divide.
 
 st.success(
     "That is the guided tour. Everything above used fixed settings, but the model "
-    "has a dozen dials. Open the Playground to set your own scenario and see whether "
-    "the divide forms, holds, or fades."
+    "has a dozen dials. Open the Playground to set your own scenario and see what "
+    "the population does."
 )
 
 st.divider()

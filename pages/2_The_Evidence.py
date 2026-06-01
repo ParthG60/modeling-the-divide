@@ -41,8 +41,8 @@ st.caption(
 st.subheader("2. The affective gap is widening")
 st.markdown(
     """
-This is the affective polarization the model encodes: not just disagreement, but
-hostility toward the other side.
+This is the affective polarization the model encodes: the hostility that runs
+beyond disagreement into dislike of the other side.
 
 By 2025, large majorities felt frustration and anger toward the opposing party:
 89% of Democrats and 86% of Republicans said the other party frustrated them, and
@@ -81,9 +81,9 @@ and [Disapproval of Congress ties record high at 86% (Gallup)]
 )
 
 st.info(
-    "So: polarization up, hostility up, and trust in Congress splitting along party "
-    "lines. None of it proves the model, but it's the world the model's mechanism "
-    "points to. Next, how the model actually works."
+    "Polarization is rising, hostility is rising, and approval of Congress is now "
+    "split by party. None of this proves the model, but it is the world its "
+    "mechanism points to."
 )
 
 st.divider()

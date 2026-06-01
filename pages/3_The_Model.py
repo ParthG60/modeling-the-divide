@@ -30,7 +30,7 @@ st.image(str(FIG / "initial_distribution.png"), use_container_width=True,
 st.subheader("Why it starts already leaning")
 st.markdown(
     """
-Notice the population doesn't begin neutral. Democrats cluster around 0.35 and
+The population doesn't begin neutral. Democrats cluster around 0.35 and
 Republicans around 0.65, with a populated but thinning middle. I didn't choose
 that tilt; it is what the survey data shows: opinion in the US is already
 bimodal, on both ideological and emotional measures (Enders, 2021). I anchor the

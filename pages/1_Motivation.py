@@ -18,8 +18,8 @@ st.caption("An interactive companion to my 2024 St Andrews dissertation. By Part
 st.markdown(
     """
 In 2024 I wrote my undergraduate dissertation on a simple question: why does a
-population split into two hostile camps? Not ordinary disagreement, but a society
-hardening into two sides that can barely talk to each other.
+population split into two hostile camps? I don't mean ordinary disagreement. I mean
+a society hardening into two sides that can barely talk to each other.
 
 The distinction matters, and the dissertation drew it clearly:
 
