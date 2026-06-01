@@ -29,8 +29,8 @@ The distinction matters, and the dissertation drew it clearly:
 
 I model two kinds. **Ideological** polarization is when the distribution of opinions
 becomes bimodal: the middle empties and people cluster at the extremes. **Affective**
-polarization is the emotional gap, where we not only disagree but dislike and
-distrust the other side.
+polarization is the emotional gap, where we dislike and distrust the other side
+rather than simply disagree with it.
 
 ### Why it matters
 

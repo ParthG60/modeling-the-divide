@@ -33,9 +33,9 @@ def _rebalance(changed):
 st.title("Playground")
 st.markdown(
     """
-Your turn. Set the dials below, press **Run**, and watch where the population ends
-up. Each control changes one rule of the simulation. The captions tell you what
-you're tuning and what it stands for.
+This is the model you can drive yourself. Set the dials below, press **Run**, and
+watch where the population ends up. Each control changes one rule of the simulation,
+and the captions tell you what you're tuning and what it stands for.
     """
 )
 
